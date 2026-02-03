@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Admin Approvals{% endblock %}
+{% block content %}
+<h2>Rental Requests</h2>
+<ul class="list-group">
+    {% for req in requests %}
+    <li class="list-group-item">
+        {{ req.username }} wants to rent {{ req.name }} (Return by: {{ req.due_date }})
+        <a href="{{ url_for('approve', rental_id=req.id) }}" class="btn btn-success btn-sm float-end ms-2">Approve</a>
+        <a href="{{ url_for('reject', rental_id=req.id) }}" class="btn btn-danger btn-sm float-end">Reject</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Available Cars{% endblock %}
+{% block content %}
+
+<h1>Available Cars</h1>
+
+<!-- Filter Form -->
+<form method="get" class="mb-4">
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <label for="category" class="col-form-label">Filter by Category:</label>
+        </div>
+        <div class="col-auto">
+            <select name="category" id="category" class="form-select">
+                <option value="">-- All Categories --</option>
+                {% for cat in categories %}
+                <option value="{{ cat.category }}" {% if cat.category == selected_category %}selected{% endif %}>{{ cat.category }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </div>
+</form>
+
+<!-- Cars List -->
+<div class="row">
+    {% if cars %}
+    {% for car in cars %}
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ car.name }}</h5>
+                <p class="card-text">Category: {{ car.category }}</p>
+                {% if session.get('user_id') %}
+                <a href="{{ url_for('rent', car_id=car.id) }}" class="btn btn-primary">Rent Now</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-warning">Login to Rent</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h1>Tidak ada mobil</h1>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}

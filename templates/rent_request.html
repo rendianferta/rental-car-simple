@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Rent Car{% endblock %}
+{% block content %}
+<h2>Rent {{ car.name }}</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Return Date (Due Date)</label>
+        <input type="date" name="due_date" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Confirm Rent</button>
+</form>
+{% endblock %}
+        

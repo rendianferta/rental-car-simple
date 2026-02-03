@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Rental History{% endblock %}
+{% block content %}
+<h2>Rental History</h2>
+<ul class="list-group">
+    {% for rent in history %}
+    <li class="list-group-item">
+        {{ rent.name }} - {{ rent.status }} | Due: {{ rent.due_date }}
+        {% if rent.status == 'approved' %}
+        <a href="{{ url_for('return_car', rental_id=rent.id) }}" class="btn btn-danger btn-sm float-end">Return</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
